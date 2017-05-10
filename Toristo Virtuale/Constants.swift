@@ -20,4 +20,15 @@ struct Constants {
     // Flickr app id
     static let flickrAppID = ""
     
+    // UserDefaults keys
+    static let hasLaunchedBefore = "hasLaunchedBefore"
+    static let userLatitude = "userLAtitude"
+    static let userLongitude = "userLongitude"
+    static let userMapScale = "userMapScale"
+    
+    // Auxiliary items
+    static let defaultMapScale: Double = 500000
+    static let defaultLatitude = -37.814
+    static let defaultLongitude = 144.96332
+    
 }

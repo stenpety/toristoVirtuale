@@ -36,6 +36,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Travel Locations" id="SuV-cG-VVJ"/>
                     <connections>
+                        <outlet property="travelMapView" destination="ZyP-EI-5xI" id="B5d-iU-tze"/>
                         <segue destination="zD1-V5-Cs7" kind="show" identifier="showPhotoAlbum" id="qfp-Gr-AhG"/>
                     </connections>
                 </viewController>
@@ -59,10 +60,10 @@
                                 <rect key="frame" x="16" y="72" width="343" height="575"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wta-cY-ImC">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="139.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="140.5"/>
                                     </mapView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ltg-Uw-Gm4">
-                                        <rect key="frame" x="0.0" y="147.5" width="343" height="386"/>
+                                        <rect key="frame" x="0.0" y="148.5" width="343" height="388"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uE5-cG-T8O">
                                             <size key="itemSize" width="50" height="50"/>
@@ -82,7 +83,7 @@
                                         </cells>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOc-we-vFm">
-                                        <rect key="frame" x="0.0" y="541.5" width="343" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="544.5" width="343" height="30.5"/>
                                         <state key="normal" title="New Collection"/>
                                     </button>
                                 </subviews>
@@ -96,6 +97,11 @@
                             <constraint firstItem="Qfp-OT-KsB" firstAttribute="top" secondItem="4Zq-i7-cAU" secondAttribute="bottom" constant="8" symbolic="YES" id="lEL-c2-qcz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="auxMapView" destination="Wta-cY-ImC" id="zwc-go-sXd"/>
+                        <outlet property="newCollectionButton" destination="rOc-we-vFm" id="SXX-De-zlH"/>
+                        <outlet property="photoAlbumCollection" destination="Ltg-Uw-Gm4" id="XD6-wU-u2O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwb-WY-ktR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
