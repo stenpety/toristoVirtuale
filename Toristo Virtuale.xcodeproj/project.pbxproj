@@ -8,22 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5A1EBF45AE0026343E /* AppDelegate.swift */; };
-		1A105A5D1EBF45AE0026343E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5C1EBF45AE0026343E /* ViewController.swift */; };
+		1A105A5D1EBF45AE0026343E /* TravelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */; };
 		1A105A601EBF45AE0026343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A5E1EBF45AE0026343E /* Main.storyboard */; };
 		1A105A631EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A611EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld */; };
 		1A105A651EBF45AE0026343E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A641EBF45AE0026343E /* Assets.xcassets */; };
 		1A105A681EBF45AE0026343E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A661EBF45AE0026343E /* LaunchScreen.storyboard */; };
+		1A9C63F01EC3648600283D07 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */; };
+		1A9C63F21EC364EF00283D07 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */; };
+		1A9C63F41EC3656F00283D07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63F31EC3656F00283D07 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1A105A571EBF45AE0026343E /* Toristo Virtuale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toristo Virtuale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A105A5A1EBF45AE0026343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A105A5C1EBF45AE0026343E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMapViewController.swift; sourceTree = "<group>"; };
 		1A105A5F1EBF45AE0026343E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1A105A621EBF45AE0026343E /* Toristo_Virtuale.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Toristo_Virtuale.xcdatamodel; sourceTree = "<group>"; };
 		1A105A641EBF45AE0026343E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A105A671EBF45AE0026343E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A105A691EBF45AE0026343E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
+		1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		1A9C63F31EC3656F00283D07 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 				1A105A5A1EBF45AE0026343E /* AppDelegate.swift */,
 				1A105A6F1EBF46140026343E /* Model */,
 				1A105A711EBF47400026343E /* ViewControllers */,
+				1A9C63EE1EC3624C00283D07 /* Views */,
 				1A105A701EBF47220026343E /* Assets */,
 				1A105A721EBF47560026343E /* Supportive Files */,
 			);
@@ -69,6 +76,7 @@
 			isa = PBXGroup;
 			children = (
 				1A105A611EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld */,
+				1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -86,7 +94,8 @@
 		1A105A711EBF47400026343E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				1A105A5C1EBF45AE0026343E /* ViewController.swift */,
+				1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */,
+				1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -94,9 +103,17 @@
 		1A105A721EBF47560026343E /* Supportive Files */ = {
 			isa = PBXGroup;
 			children = (
+				1A9C63F31EC3656F00283D07 /* Constants.swift */,
 				1A105A691EBF45AE0026343E /* Info.plist */,
 			);
 			name = "Supportive Files";
+			sourceTree = "<group>";
+		};
+		1A9C63EE1EC3624C00283D07 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,9 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A9C63F21EC364EF00283D07 /* CoreDataStack.swift in Sources */,
 				1A105A631EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld in Sources */,
-				1A105A5D1EBF45AE0026343E /* ViewController.swift in Sources */,
+				1A105A5D1EBF45AE0026343E /* TravelMapViewController.swift in Sources */,
 				1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */,
+				1A9C63F01EC3648600283D07 /* PhotoAlbumViewController.swift in Sources */,
+				1A9C63F41EC3656F00283D07 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
