@@ -30,5 +30,5 @@ struct Constants {
     static let defaultMapScale: Double = 500000
     static let defaultLatitude = -37.814
     static let defaultLongitude = 144.96332
-    
+    static let metersInOneLatDegree: Double = 111131
 }
