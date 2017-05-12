@@ -12,6 +12,8 @@ import MapKit
 class TravelMapViewController: UIViewController {
     
     // MARK: Properties
+    var newAlbumLatitude: Double?
+    var newAlbumLongitude: Double?
     
     // MARK: Outlets
     @IBOutlet weak var travelMapView: MKMapView!
