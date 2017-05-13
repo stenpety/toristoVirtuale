@@ -41,9 +41,9 @@ struct FlickrConstants {
     static let APIHost = "api.flickr.com"
     static let APIPath = "/services/rest"
     
-    // Parameters for search by coordinates
-    static let searchBBoxHalfWidth = 1.0
+    // Parameters for making bounding box (geo location search)
     static let searchBBoxHalfHeight = 1.0
+    static let searchBBoxHalfWidth = 1.0
     static let searchLatRange = (-90.0, 90.0)
     static let searchLongRange = (-180.0, 180.0)
     
@@ -72,12 +72,14 @@ struct FlickrConstants {
         static let photo = "photo"
         static let title = "title"
         static let mediumURL = "url_m"
-        static let pages = "pages"
-        static let total = "total"
+        static let message = "message" // For debug - read stat fail details
+        //static let pages = "pages"
+        //static let total = "total"
     }
     
     struct ResponseValues {
         static let okStatus = "ok"
+        static let failStatus = "fail"
     }
     
 }
