@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A0967AC1ECE1AE200DDDD0B /* Pin+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967A81ECE1AE200DDDD0B /* Pin+CoreDataClass.swift */; };
+		1A0967AD1ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967A91ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift */; };
+		1A0967AE1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */; };
+		1A0967AF1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */; };
 		1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5A1EBF45AE0026343E /* AppDelegate.swift */; };
 		1A105A5D1EBF45AE0026343E /* TravelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */; };
 		1A105A601EBF45AE0026343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A5E1EBF45AE0026343E /* Main.storyboard */; };
@@ -21,6 +25,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1A0967A81ECE1AE200DDDD0B /* Pin+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A0967A91ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
+		1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A105A571EBF45AE0026343E /* Toristo Virtuale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toristo Virtuale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A105A5A1EBF45AE0026343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMapViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +91,10 @@
 				1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */,
 				1A4E74091EC5A82200CC16F8 /* FlickrDownloader.swift */,
 				1A105A611EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld */,
+				1A0967A81ECE1AE200DDDD0B /* Pin+CoreDataClass.swift */,
+				1A0967A91ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift */,
+				1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */,
+				1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -195,9 +207,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A0967AC1ECE1AE200DDDD0B /* Pin+CoreDataClass.swift in Sources */,
+				1A0967AE1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift in Sources */,
 				1A9C63F21EC364EF00283D07 /* CoreDataStack.swift in Sources */,
 				1A105A631EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld in Sources */,
+				1A0967AD1ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift in Sources */,
 				1A4E741C1EC5CECF00CC16F8 /* GlobalFunctions.swift in Sources */,
+				1A0967AF1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift in Sources */,
 				1A4E740A1EC5A82200CC16F8 /* FlickrDownloader.swift in Sources */,
 				1A105A5D1EBF45AE0026343E /* TravelMapViewController.swift in Sources */,
 				1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */,
