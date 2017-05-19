@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 struct Constants {
     
@@ -16,7 +17,6 @@ struct Constants {
     // Storyboard Identifiers
     static let segueShowPhotoAlbum = "showPhotoAlbum"
     static let photoAlbumCollectionItem = "photoAlbumCollectionItem"
-    
     
     // UserDefaults keys
     static let hasLaunchedBefore = "hasLaunchedBefore"
@@ -29,6 +29,15 @@ struct Constants {
     static let defaultLatitude = -37.814
     static let defaultLongitude = 144.96332
     static let metersInOneLatDegree: Double = 111131
+    
+    // Files, folders
+    static let modelExtension = "momd"
+    static let sqliteStoreName = "model.sqlite"
+    
+    // DataBase
+    // Options for migration
+    static let optionsForMigration = [NSInferMappingModelAutomaticallyOption: true,
+                                      NSMigratePersistentStoresAutomaticallyOption: true]
 }
 
 struct FlickrConstants {
