@@ -11,6 +11,7 @@
 		1A0967AD1ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967A91ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift */; };
 		1A0967AE1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */; };
 		1A0967AF1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */; };
+		1A0967B11ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0967B01ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift */; };
 		1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5A1EBF45AE0026343E /* AppDelegate.swift */; };
 		1A105A5D1EBF45AE0026343E /* TravelMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */; };
 		1A105A601EBF45AE0026343E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A5E1EBF45AE0026343E /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		1A0967A91ECE1AE200DDDD0B /* Pin+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Pin+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		1A0967B01ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
 		1A105A571EBF45AE0026343E /* Toristo Virtuale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toristo Virtuale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A105A5A1EBF45AE0026343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMapViewController.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		1A9C63EE1EC3624C00283D07 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				1A0967B01ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -219,6 +222,7 @@
 				1A105A5B1EBF45AE0026343E /* AppDelegate.swift in Sources */,
 				1A9C63F01EC3648600283D07 /* PhotoAlbumViewController.swift in Sources */,
 				1A9C63F41EC3656F00283D07 /* Constants.swift in Sources */,
+				1A0967B11ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

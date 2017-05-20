@@ -9,11 +9,12 @@
 import UIKit
 import MapKit
 
-class PhotoAlbumViewController: UIViewController {
+class PhotoAlbumViewController: UICollectionViewController {
     
     // MARK: Properties
     
     @IBOutlet weak var auxMapView: MKMapView!
+    @IBOutlet weak var locationNameLabel: UILabel!
     @IBOutlet weak var photoAlbumCollection: UICollectionView!
     @IBOutlet weak var newCollectionButton: UIButton!
     

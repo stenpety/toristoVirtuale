@@ -6,7 +6,7 @@
 //  Copyright © 2017 Petr Stenin. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import CoreData
 
 struct Constants {
@@ -18,16 +18,23 @@ struct Constants {
     static let segueShowPhotoAlbum = "showPhotoAlbum"
     static let photoAlbumCollectionItem = "photoAlbumCollectionItem"
     
+    // Collection view constants
+    static let initialNumberOfCellsInRow = 3
+    static let collectionMinInteritemSpace: CGFloat = 3
+    static let collectionMinLineSpace: CGFloat = 3
+    
     // UserDefaults keys
     static let hasLaunchedBefore = "hasLaunchedBefore"
     static let userLatitude = "userLAtitude"
     static let userLongitude = "userLongitude"
     static let userMapScale = "userMapScale"
     
-    // Auxiliary items
+    // Defaults for map
     static let defaultMapScale: Double = 500000
     static let defaultLatitude = -37.814
     static let defaultLongitude = 144.96332
+    
+    // Auxiliary items
     static let metersInOneLatDegree: Double = 111131
     
     // Files, folders
@@ -38,6 +45,14 @@ struct Constants {
     // Options for migration
     static let optionsForMigration = [NSInferMappingModelAutomaticallyOption: true,
                                       NSMigratePersistentStoresAutomaticallyOption: true]
+    // Entities
+    static let photoEntity = "Photo"
+    static let pinEntity = "Pin"
+    // Keys
+    static let keyLatitudeForPin = "latitude"
+    static let keyLongitudeForPin = "longitude"
+    static let keyLocationNameForPin = "locationName"
+    static let keyPhotoForPhoto = "photo"
 }
 
 struct FlickrConstants {
