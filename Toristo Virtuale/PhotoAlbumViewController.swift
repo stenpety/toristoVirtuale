@@ -22,14 +22,37 @@ class PhotoAlbumViewController: UICollectionViewController {
     @IBOutlet weak var photoAlbumFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var newCollectionButton: UIButton!
     
+    // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setupFlowLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Get images from the database
+        photoAlbumCollection.reloadData() // Reload collection to reflect changes
+    }
     
+    // MARK: Data Source
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        // TODO: Get the number of sections from the DB
+        return 0
+    }
     
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = photoAlbumCollection.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
+        //TODO: Setup the cell - put image from DB
+        
+        return cell
+    }
+    
+    // MARK: Actions
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: delete an item
+    }
     
     
     // MARK: Auxiliary procedures
