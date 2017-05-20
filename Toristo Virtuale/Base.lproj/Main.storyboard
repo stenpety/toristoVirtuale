@@ -122,6 +122,7 @@
                         <outlet property="locationNameLabel" destination="RVR-fF-yW8" id="GJl-L6-rsX"/>
                         <outlet property="newCollectionButton" destination="rOc-we-vFm" id="SXX-De-zlH"/>
                         <outlet property="photoAlbumCollection" destination="Ltg-Uw-Gm4" id="XD6-wU-u2O"/>
+                        <outlet property="photoAlbumFlowLayout" destination="uE5-cG-T8O" id="ZPp-BU-leJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gwb-WY-ktR" userLabel="First Responder" sceneMemberID="firstResponder"/>
