@@ -30,6 +30,11 @@ class TravelMapViewController: UIViewController {
             UserDefaults.standard.set(Constants.defaultMapScale, forKey: Constants.userMapScale)
             UserDefaults.standard.synchronize()
         }
+        
+        // Add Long Press gesture recognizer
+        let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(gestureRecognizer:)))
+        longPressGR.minimumPressDuration = 2.0 //Set press duration
+        travelMapView.addGestureRecognizer(longPressGR) //Add gesture recognizer to the mapView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +58,10 @@ class TravelMapViewController: UIViewController {
         print("Map position saved")
     }
     
+    // MARK: Actions
+    func addAnnotation(gestureRecognizer: UIGestureRecognizer) {
+        print("New annotation")
+    }
     
 }
 
