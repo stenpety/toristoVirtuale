@@ -31,6 +31,7 @@
 		1A0967AA1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataClass.swift"; sourceTree = "<group>"; };
 		1A0967AB1ECE1AE200DDDD0B /* Photo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Photo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		1A0967B01ED0355900DDDD0B /* PhotoAlbumCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumCollectionViewCell.swift; sourceTree = "<group>"; };
+		1A0967B21ED19BA200DDDD0B /* Toristo_Virtuale 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Toristo_Virtuale 2.xcdatamodel"; sourceTree = "<group>"; };
 		1A105A571EBF45AE0026343E /* Toristo Virtuale.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Toristo Virtuale.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A105A5A1EBF45AE0026343E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelMapViewController.swift; sourceTree = "<group>"; };
@@ -398,9 +399,10 @@
 		1A105A611EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1A0967B21ED19BA200DDDD0B /* Toristo_Virtuale 2.xcdatamodel */,
 				1A105A621EBF45AE0026343E /* Toristo_Virtuale.xcdatamodel */,
 			);
-			currentVersion = 1A105A621EBF45AE0026343E /* Toristo_Virtuale.xcdatamodel */;
+			currentVersion = 1A0967B21ED19BA200DDDD0B /* Toristo_Virtuale 2.xcdatamodel */;
 			path = Toristo_Virtuale.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

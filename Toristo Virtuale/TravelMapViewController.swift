@@ -72,6 +72,7 @@ class TravelMapViewController: UIViewController {
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude ), completionHandler: {(placemarks, error) -> Void in
                 
                 guard error == nil, let placemarkArray = placemarks else {
+                    // TODO: Make alert: Geocoding failed
                     print("Geocoding failed")
                     return
                 }
@@ -94,7 +95,6 @@ class TravelMapViewController: UIViewController {
                     newAnnotation.subtitle = Constants.defaultLocalityName
                 }
                 self.travelMapView.addAnnotation(newAnnotation)
-                print(newAnnotation.title!)
             })
         }
     }

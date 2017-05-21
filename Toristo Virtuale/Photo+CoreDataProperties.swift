@@ -2,7 +2,7 @@
 //  Photo+CoreDataProperties.swift
 //  Toristo Virtuale
 //
-//  Created by Petr Stenin on 18/05/2017.
+//  Created by Petr Stenin on 21/05/2017.
 //  Copyright © 2017 Petr Stenin. All rights reserved.
 //
 
@@ -17,6 +17,7 @@ extension Photo {
     }
 
     @NSManaged public var photo: NSData?
+    @NSManaged public var photoURL: String?
     @NSManaged public var pin: Pin?
 
 }
