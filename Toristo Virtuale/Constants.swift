@@ -33,6 +33,9 @@ struct Constants {
     static let defaultMapScale: Double = 500000
     static let defaultLatitude = -37.814
     static let defaultLongitude = 144.96332
+    static let defaultMinPressDuration = 1.0 // Min press duration for LongPress recognizer
+    static let defaultLocationName = "Unknown location"
+    static let defaultLocalityName = "Unknown region"
     
     // Auxiliary items
     static let metersInOneLatDegree: Double = 111131

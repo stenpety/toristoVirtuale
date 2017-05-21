@@ -33,7 +33,7 @@ class TravelMapViewController: UIViewController {
         
         // Add Long Press gesture recognizer
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(gestureRecognizer:)))
-        longPressGR.minimumPressDuration = 2.0 //Set press duration
+        longPressGR.minimumPressDuration = Constants.defaultMinPressDuration //Set press duration
         travelMapView.addGestureRecognizer(longPressGR) //Add gesture recognizer to the mapView
     }
     
@@ -54,14 +54,49 @@ class TravelMapViewController: UIViewController {
         UserDefaults.standard.set(travelMapView.region.center.longitude, forKey: Constants.userLongitude)
         UserDefaults.standard.set(travelMapView.region.span.latitudeDelta * Constants.metersInOneLatDegree, forKey: Constants.userMapScale)
         UserDefaults.standard.synchronize()
-        
-        print("Map position saved")
     }
     
     // MARK: Actions
     func addAnnotation(gestureRecognizer: UIGestureRecognizer) {
-        print("New annotation")
+        if gestureRecognizer.state == UIGestureRecognizerState.began {
+            
+            // Get coordinates of touch point
+            let pointOfTouch = gestureRecognizer.location(in: travelMapView)
+            let pointCoordinates = travelMapView.convert(pointOfTouch, toCoordinateFrom: travelMapView)
+            
+            // Make a new annotation
+            let newAnnotation = MKPointAnnotation()
+            newAnnotation.coordinate = pointCoordinates
+            
+            // Get a name for new location
+            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude ), completionHandler: {(placemarks, error) -> Void in
+                
+                guard error == nil, let placemarkArray = placemarks else {
+                    print("Geocoding failed")
+                    return
+                }
+                
+                if placemarkArray.count > 0 {
+                    let placemark = placemarkArray[0] 
+                    
+                    if let thoroughfare = placemark.thoroughfare {
+                        newAnnotation.title = thoroughfare
+                    } else {
+                        newAnnotation.title = Constants.defaultLocationName
+                    }
+                    if let subLocality = placemark.subLocality {
+                        newAnnotation.subtitle = subLocality
+                    } else {
+                        newAnnotation.subtitle = Constants.defaultLocalityName
+                    }
+                } else {
+                    newAnnotation.title = Constants.defaultLocationName
+                    newAnnotation.subtitle = Constants.defaultLocalityName
+                }
+                self.travelMapView.addAnnotation(newAnnotation)
+                print(newAnnotation.title!)
+            })
+        }
     }
-    
 }
 
