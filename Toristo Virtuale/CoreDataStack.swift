@@ -34,14 +34,16 @@ struct CoreDataStack {
         
         // The model is in the MAIN bundle - set the modelURL property
         guard let mainBundleModelURL = Bundle.main.url(forResource: modelName, withExtension: Constants.modelExtension) else {
-            // TODO: Give alert - unable to find MODEL in the main bundle
+            // TODO: Give alert - Unable to find MODEL in the main bundle
+            print("Unable to find MODEL in the main bundle")
             return nil
         }
         modelURL = mainBundleModelURL
         
         // Create a model from the URL
         guard let modelFromURL = NSManagedObjectModel(contentsOf: modelURL) else {
-            // TODO: Give alert - unable to create MODEL from the URL
+            // TODO: Give alert - Unable to create MODEL from the URL
+            print("Unable to create MODEL from the URL")
             return nil
         }
         touristModel = modelFromURL

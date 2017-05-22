@@ -41,6 +41,7 @@ struct Constants {
     static let metersInOneLatDegree: Double = 111131
     
     // Files, folders
+    static let modelName = "Toristo_Virtuale 2"
     static let modelExtension = "momd"
     static let sqliteStoreName = "model.sqlite"
     
@@ -56,6 +57,7 @@ struct Constants {
     static let keyLongitudeForPin = "longitude"
     static let keyLocationNameForPin = "locationName"
     static let keyPhotoForPhoto = "photo"
+    static let keyPhotoURLForPhoto = "photoURL"
 }
 
 struct FlickrConstants {

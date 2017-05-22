@@ -13,15 +13,9 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    let stack = CoreDataStack(modelName: Constants.modelName)!
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        let downloader = FlickrDownloader()
-        let arrayOfURLs = downloader.downloadImagesByCoordinates(latitude: Constants.defaultLatitude, longitude: Constants.defaultLongitude)
-        
-        print("@@@")
-        print(arrayOfURLs)
         
         return true
     }

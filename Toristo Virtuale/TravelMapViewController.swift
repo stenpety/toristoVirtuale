@@ -8,15 +8,36 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class TravelMapViewController: UIViewController {
+class TravelMapViewController: UIViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: Properties
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
+        // TODO: Do I really need this didSet?
+        didSet {
+            fetchedResultsController?.delegate = self
+            // TODO: Execute search
+            // TODO: reload map data?
+        }
+    }
+    
     var newAlbumLatitude: Double?
     var newAlbumLongitude: Double?
     
     // MARK: Outlets
     @IBOutlet weak var travelMapView: MKMapView!
+    
+    // MARK: Initializers
+    init (fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.fetchedResultsController = fetchedResultsController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -35,6 +56,18 @@ class TravelMapViewController: UIViewController {
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(gestureRecognizer:)))
         longPressGR.minimumPressDuration = Constants.defaultMinPressDuration //Set press duration
         travelMapView.addGestureRecognizer(longPressGR) //Add gesture recognizer to the mapView
+        
+        // CoreData stuff
+        // Get the stack
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let stack = appDelegate.stack //CoreData stack of AppDelegate singleton
+        
+        // Create a Fetch Request
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.pinEntity)
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.keyLocationNameForPin, ascending: true)]
+        
+        // Create a Fetched results controller
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
