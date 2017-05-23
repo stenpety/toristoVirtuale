@@ -41,9 +41,9 @@ struct Constants {
     static let metersInOneLatDegree: Double = 111131
     
     // Files, folders
-    static let modelName = "Toristo_Virtuale 2"
+    static let modelName = "Toristo_Virtuale"
     static let modelExtension = "momd"
-    static let sqliteStoreName = "model.sqlite"
+    static let sqliteStoreName = "Toristo_Virtuale.sqlite"
     
     // DataBase
     // Options for migration
