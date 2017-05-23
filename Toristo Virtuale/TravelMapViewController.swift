@@ -127,6 +127,8 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
                     newAnnotation.title = Constants.defaultLocationName
                     newAnnotation.subtitle = Constants.defaultLocalityName
                 }
+                // Make new CoreData item (pin) - in the main queue?
+                let _ = Pin(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude, locationName: newAnnotation.title, context: self.fetchedResultsController!.managedObjectContext)
                 self.travelMapView.addAnnotation(newAnnotation)
             })
         }
