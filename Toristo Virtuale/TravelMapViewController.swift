@@ -22,6 +22,8 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
         }
     }
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    
     var newAlbumLatitude: Double?
     var newAlbumLongitude: Double?
     
@@ -59,7 +61,7 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
         
         // CoreData stuff
         // Get the stack
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
         let stack = appDelegate.stack //CoreData stack of AppDelegate singleton
         
         // Create a Fetch Request
@@ -77,6 +79,29 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
         let userCoordinates = CLLocationCoordinate2D(latitude: UserDefaults.standard.double(forKey: Constants.userLatitude), longitude: UserDefaults.standard.double(forKey: Constants.userLongitude))
         let region = MKCoordinateRegionMakeWithDistance(userCoordinates, UserDefaults.standard.double(forKey: Constants.userMapScale), UserDefaults.standard.double(forKey: Constants.userMapScale))
         travelMapView.setRegion(region, animated: true)
+        
+        // Load annotations from CoreData store
+        var annotations = [MKPointAnnotation]()
+        let frAnnot = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.pinEntity)
+        let moc = fetchedResultsController!.managedObjectContext
+        
+        do {
+            let result = try moc.fetch(frAnnot)
+            for object in result {
+                if object is Pin {
+                    let annotation = MKPointAnnotation()
+                    let pin = object as! Pin
+                    annotation.coordinate.latitude = pin.latitude
+                    annotation.coordinate.longitude = pin.longitude
+                    annotation.title = pin.locationName
+                    annotations.append(annotation)
+                }
+            }
+        } catch {
+            fatalError("Cannot fetch any Pins")
+        }
+        
+        travelMapView.addAnnotations(annotations)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -111,7 +136,7 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
                 }
                 
                 if placemarkArray.count > 0 {
-                    let placemark = placemarkArray[0] 
+                    let placemark = placemarkArray[0]
                     
                     if let thoroughfare = placemark.thoroughfare {
                         newAnnotation.title = thoroughfare
@@ -130,6 +155,7 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
                 // Make new CoreData item (pin) - in the main queue?
                 let _ = Pin(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude, locationName: newAnnotation.title, context: self.fetchedResultsController!.managedObjectContext)
                 self.travelMapView.addAnnotation(newAnnotation)
+                self.appDelegate.stack.save()
             })
         }
     }
