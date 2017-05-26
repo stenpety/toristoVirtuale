@@ -22,6 +22,7 @@ struct Constants {
     static let initialNumberOfCellsInRow = 3
     static let collectionMinInteritemSpace: CGFloat = 3
     static let collectionMinLineSpace: CGFloat = 3
+    static let collectionViewTitle = "My memories"
     
     // UserDefaults keys
     static let hasLaunchedBefore = "hasLaunchedBefore"

@@ -24,9 +24,6 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
-    var newAlbumLatitude: Double?
-    var newAlbumLongitude: Double?
-    
     // MARK: Outlets
     @IBOutlet weak var travelMapView: MKMapView!
     
@@ -39,7 +36,6 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    
     
     // MARK: Life cycle
     override func viewDidLoad() {
@@ -163,9 +159,8 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
     // MARK: Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Constants.segueShowPhotoAlbum {
-            
+            // TODO: pass activated Pin to PhotoAlbum VC
         }
     }
-    
 }
 

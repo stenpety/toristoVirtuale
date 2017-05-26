@@ -8,12 +8,23 @@
 
 import UIKit
 import MapKit
+import CoreData
 
-class PhotoAlbumViewController: UICollectionViewController {
+class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
     
     // MARK: Properties
     var numberOfCellsInRow = Constants.initialNumberOfCellsInRow // Set to initial value 3
     
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    var pinForAlbum = Pin() //Values to be obtained from TravelMapVC
+    
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            fetchedResultsController?.delegate = self
+            // TODO: Execute search
+            // TODO: reload colectionView data?
+        }
+    }
     
     // MARK: Outlets
     @IBOutlet weak var auxMapView: MKMapView!
@@ -22,16 +33,41 @@ class PhotoAlbumViewController: UICollectionViewController {
     @IBOutlet weak var photoAlbumFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var newCollectionButton: UIButton!
     
+    // MARK: Initializers
+    init (fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.fetchedResultsController = fetchedResultsController
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     // MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Setup Collection view
         setupFlowLayout()
+        
+        // Set the title of this view
+        title = Constants.collectionViewTitle
+        
+        // Get the CoreData stack (from AppDelegate)
+        let stack = appDelegate.stack
+        
+        // Create a FetchRequest
+        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
+        
+        // Setup FetchedRequestController (which context??)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Get images from the database
+        // Download images using URL
         photoAlbumCollection.reloadData() // Reload collection to reflect changes
     }
     
