@@ -161,16 +161,7 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
     func bringUpPhotoAlbum(forPin pin: Pin) {
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: Constants.photoAlbumViewController) as! PhotoAlbumViewController
         photoAlbumViewController.pinForAlbum = pin
-        navigationController?.present(photoAlbumViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(photoAlbumViewController, animated: true)
     }
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == Constants.segueShowPhotoAlbum {
-//            let photoAlbumViewController = segue.destination as! PhotoAlbumViewController
-//            
-//            
-//        }
-//    }
 }
 

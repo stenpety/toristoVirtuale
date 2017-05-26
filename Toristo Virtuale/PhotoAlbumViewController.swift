@@ -69,6 +69,16 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        // Setup mini-map & label
+        // Check whether 'pin' data were obtained. Otherwise this all is meaningless
+        guard let pinInUse = pinForAlbum else {
+            // TODO: Error, perhaps fatal
+            return
+        }
+        locationNameLabel.text = pinInUse.locationName
+        
+        
+        
         // Download images using URL
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
