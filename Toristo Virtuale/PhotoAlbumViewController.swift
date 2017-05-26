@@ -77,7 +77,16 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         locationNameLabel.text = pinInUse.locationName
         
+        // Center mini-map on user's new pin location:
+        let pinInUseCoordinates = CLLocationCoordinate2D(latitude: pinInUse.latitude, longitude: pinInUse.longitude)
+        let region = MKCoordinateRegionMakeWithDistance(pinInUseCoordinates, Constants.defaultMiniMapScale, Constants.defaultMiniMapScale)
+        auxMapView.setRegion(region, animated: false)
         
+        // Set a pin
+        let miniMapPin = MKPointAnnotation()
+        miniMapPin.coordinate = pinInUseCoordinates
+        miniMapPin.title = pinInUse.locationName
+        auxMapView.addAnnotation(miniMapPin)
         
         // Download images using URL
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes

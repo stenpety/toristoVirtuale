@@ -56,20 +56,26 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qfp-OT-KsB">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Qfp-OT-KsB">
                                 <rect key="frame" x="16" y="72" width="343" height="575"/>
                                 <subviews>
                                     <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Wta-cY-ImC">
-                                        <rect key="frame" x="0.0" y="0.0" width="343" height="132.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="144"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="144" id="Ecz-G6-oCf"/>
+                                        </constraints>
                                     </mapView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVR-fF-yW8">
-                                        <rect key="frame" x="0.0" y="140.5" width="343" height="24"/>
+                                        <rect key="frame" x="0.0" y="152" width="343" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="9N1-wA-BA7"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Ltg-Uw-Gm4">
-                                        <rect key="frame" x="0.0" y="172.5" width="343" height="364.5"/>
+                                        <rect key="frame" x="0.0" y="184" width="343" height="359"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="uE5-cG-T8O">
                                             <size key="itemSize" width="100" height="100"/>
@@ -103,7 +109,10 @@
                                         </cells>
                                     </collectionView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rOc-we-vFm">
-                                        <rect key="frame" x="0.0" y="545" width="343" height="30"/>
+                                        <rect key="frame" x="0.0" y="551" width="343" height="24"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="ImP-Vs-ZAr"/>
+                                        </constraints>
                                         <state key="normal" title="New Collection"/>
                                     </button>
                                 </subviews>
