@@ -121,6 +121,7 @@
                         <outlet property="auxMapView" destination="Wta-cY-ImC" id="zwc-go-sXd"/>
                         <outlet property="locationNameLabel" destination="RVR-fF-yW8" id="GJl-L6-rsX"/>
                         <outlet property="newCollectionButton" destination="rOc-we-vFm" id="SXX-De-zlH"/>
+                        <outlet property="photoAlbumCollectionView" destination="Ltg-Uw-Gm4" id="B5U-6g-8NA"/>
                         <outlet property="photoAlbumFlowLayout" destination="uE5-cG-T8O" id="ZPp-BU-leJ"/>
                     </connections>
                 </viewController>

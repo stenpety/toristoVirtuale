@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsControllerDelegate {
+class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
     
     // MARK: Properties
     var numberOfCellsInRow = Constants.initialNumberOfCellsInRow // Set to initial value 3
@@ -28,6 +28,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
     // MARK: Outlets
     @IBOutlet weak var auxMapView: MKMapView!
     @IBOutlet weak var locationNameLabel: UILabel!
+    @IBOutlet weak var photoAlbumCollectionView: UICollectionView!
     @IBOutlet weak var photoAlbumFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var newCollectionButton: UIButton!
     
@@ -47,6 +48,8 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         
         // Setup Collection view
         setupFlowLayout()
+        photoAlbumCollectionView.delegate = self
+        photoAlbumCollectionView.dataSource = self
         
         // Set the title of this view
         title = Constants.collectionViewTitle
@@ -56,6 +59,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         
         // Create a FetchRequest
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
+        fr.sortDescriptors = [NSSortDescriptor(key: Constants.keyPhotoURLForPhoto, ascending: true)]
         
         // Setup FetchedRequestController (which context??)
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -66,17 +70,17 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         super.viewWillAppear(animated)
         
         // Download images using URL
-        collectionView?.reloadData() // Reload collection to reflect changes
+        photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
     
     // MARK: Data Source
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         // TODO: Get the number of sections from the DB
         return 0
     }
     
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
         //TODO: Setup the cell - put image from DB
         
@@ -84,7 +88,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
     }
     
     // MARK: Actions
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: delete an item
     }
     
@@ -96,7 +100,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         photoAlbumFlowLayout.minimumLineSpacing = Constants.collectionMinLineSpace
         
         // Set item width with respect to the number of items in row
-        let dimension = ((collectionView?.frame.size.width)! - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
+        let dimension = ((photoAlbumCollectionView.frame.size.width) - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
         photoAlbumFlowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
 }
