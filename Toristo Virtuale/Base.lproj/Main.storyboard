@@ -47,7 +47,7 @@
         <!--Photo Album-->
         <scene sceneID="hZc-A9-RY9">
             <objects>
-                <viewController id="zD1-V5-Cs7" userLabel="Photo Album" customClass="PhotoAlbumViewController" customModule="Toristo_Virtuale" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="photoAlbumViewController" id="zD1-V5-Cs7" userLabel="Photo Album" customClass="PhotoAlbumViewController" customModule="Toristo_Virtuale" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4Zq-i7-cAU"/>
                         <viewControllerLayoutGuide type="bottom" id="zxG-0w-JfB"/>
@@ -121,7 +121,6 @@
                         <outlet property="auxMapView" destination="Wta-cY-ImC" id="zwc-go-sXd"/>
                         <outlet property="locationNameLabel" destination="RVR-fF-yW8" id="GJl-L6-rsX"/>
                         <outlet property="newCollectionButton" destination="rOc-we-vFm" id="SXX-De-zlH"/>
-                        <outlet property="photoAlbumCollection" destination="Ltg-Uw-Gm4" id="XD6-wU-u2O"/>
                         <outlet property="photoAlbumFlowLayout" destination="uE5-cG-T8O" id="ZPp-BU-leJ"/>
                     </connections>
                 </viewController>

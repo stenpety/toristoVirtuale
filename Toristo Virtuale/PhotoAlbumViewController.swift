@@ -14,9 +14,8 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
     
     // MARK: Properties
     var numberOfCellsInRow = Constants.initialNumberOfCellsInRow // Set to initial value 3
-    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    var pinForAlbum = Pin() //Values to be obtained from TravelMapVC
+    var pinForAlbum: Pin? = nil //Values to be obtained from TravelMapVC
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
@@ -29,7 +28,6 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
     // MARK: Outlets
     @IBOutlet weak var auxMapView: MKMapView!
     @IBOutlet weak var locationNameLabel: UILabel!
-    @IBOutlet weak var photoAlbumCollection: UICollectionView!
     @IBOutlet weak var photoAlbumFlowLayout: UICollectionViewFlowLayout!
     @IBOutlet weak var newCollectionButton: UIButton!
     
@@ -68,7 +66,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         super.viewWillAppear(animated)
         
         // Download images using URL
-        photoAlbumCollection.reloadData() // Reload collection to reflect changes
+        collectionView?.reloadData() // Reload collection to reflect changes
     }
     
     // MARK: Data Source
@@ -79,7 +77,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = photoAlbumCollection.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
         //TODO: Setup the cell - put image from DB
         
         return cell
@@ -98,7 +96,7 @@ class PhotoAlbumViewController: UICollectionViewController, NSFetchedResultsCont
         photoAlbumFlowLayout.minimumLineSpacing = Constants.collectionMinLineSpace
         
         // Set item width with respect to the number of items in row
-        let dimension = ((photoAlbumCollection?.frame.size.width)! - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
+        let dimension = ((collectionView?.frame.size.width)! - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
         photoAlbumFlowLayout.itemSize = CGSize(width: dimension, height: dimension)
     }
 }

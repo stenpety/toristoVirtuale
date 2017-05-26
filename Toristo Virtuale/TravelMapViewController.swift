@@ -149,18 +149,28 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
                     newAnnotation.subtitle = Constants.defaultLocalityName
                 }
                 // Make new CoreData item (pin) - in the main queue?
-                let _ = Pin(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude, locationName: newAnnotation.title, context: self.fetchedResultsController!.managedObjectContext)
+                let newPin = Pin(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude, locationName: newAnnotation.title, context: self.fetchedResultsController!.managedObjectContext)
                 self.travelMapView.addAnnotation(newAnnotation)
                 self.appDelegate.stack.save()
+                self.bringUpPhotoAlbum(forPin: newPin)
             })
         }
     }
     
     // MARK: Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Constants.segueShowPhotoAlbum {
-            // TODO: pass activated Pin to PhotoAlbum VC
-        }
+    func bringUpPhotoAlbum(forPin pin: Pin) {
+        let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: Constants.photoAlbumViewController) as! PhotoAlbumViewController
+        photoAlbumViewController.pinForAlbum = pin
+        navigationController?.present(photoAlbumViewController, animated: true, completion: nil)
     }
+    
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == Constants.segueShowPhotoAlbum {
+//            let photoAlbumViewController = segue.destination as! PhotoAlbumViewController
+//            
+//            
+//        }
+//    }
 }
 

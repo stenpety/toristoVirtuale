@@ -17,6 +17,7 @@ struct Constants {
     // Storyboard Identifiers
     static let segueShowPhotoAlbum = "showPhotoAlbum"
     static let photoAlbumCollectionItem = "photoAlbumCollectionItem"
+    static let photoAlbumViewController = "photoAlbumViewController"
     
     // Collection view constants
     static let initialNumberOfCellsInRow = 3
