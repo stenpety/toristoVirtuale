@@ -11,7 +11,7 @@ import UIKit
 class FlickrDownloader: NSObject {
     
     // MARK: Downloading function
-    func downloadImagesByCoordinates(latitude: Double, longitude: Double, completionHandlerForDownload: @escaping (_ result: [URL]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    func downloadImagesByCoordinates(latitude: Double, longitude: Double, completionHandlerForDownload: @escaping (_ result: [URL]?, _ error: NSError?) -> Void) -> Void {
         
         var imageURLs = [URL]()
         
@@ -97,7 +97,6 @@ class FlickrDownloader: NSObject {
             completionHandlerForDownload(imageURLs, nil)
         })
         task.resume()
-        return task
     }
     
     // MARK: Helper Functions

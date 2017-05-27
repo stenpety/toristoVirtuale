@@ -71,6 +71,14 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
             return
         }
         
+        let flickrDownloader = FlickrDownloader()
+        flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
+            // TODO: Save array of picture URLs to CoreData store
+            
+            
+        })
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
