@@ -18,6 +18,7 @@ struct Constants {
     static let segueShowPhotoAlbum = "showPhotoAlbum"
     static let photoAlbumCollectionItem = "photoAlbumCollectionItem"
     static let photoAlbumViewController = "photoAlbumViewController"
+    static let pinAnnotationView = "pinAnnotationView"
     
     // Collection view constants
     static let initialNumberOfCellsInRow = 3

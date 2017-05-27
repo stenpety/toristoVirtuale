@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class TravelMapViewController: UIViewController, NSFetchedResultsControllerDelegate {
+class TravelMapViewController: UIViewController, NSFetchedResultsControllerDelegate, MKMapViewDelegate {
     
     // MARK: Properties
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
@@ -54,6 +54,9 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
         let longPressGR = UILongPressGestureRecognizer(target: self, action: #selector(addAnnotation(gestureRecognizer:)))
         longPressGR.minimumPressDuration = Constants.defaultMinPressDuration //Set press duration
         travelMapView.addGestureRecognizer(longPressGR) //Add gesture recognizer to the mapView
+        
+        // Assign mapView delegate
+        travelMapView.delegate = self
         
         // CoreData stuff
         // Get the stack
@@ -162,6 +165,12 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
         let photoAlbumViewController = storyboard!.instantiateViewController(withIdentifier: Constants.photoAlbumViewController) as! PhotoAlbumViewController
         photoAlbumViewController.pinForAlbum = pin
         navigationController?.pushViewController(photoAlbumViewController, animated: true)
+    }
+    
+    // MARK: MKMapViewDelegate methods
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        let newPin = Pin(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!, locationName: (view.annotation?.title)!, context: fetchedResultsController!.managedObjectContext)
+        bringUpPhotoAlbum(forPin: newPin)
     }
 }
 
