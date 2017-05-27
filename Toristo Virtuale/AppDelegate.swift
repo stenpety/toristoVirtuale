@@ -17,6 +17,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // Test of flickrDownloader
+//        let testDownloader = FlickrDownloader()
+//        testDownloader.downloadImagesByCoordinates(latitude: Constants.defaultLatitude, longitude: Constants.defaultLongitude, completionHandlerForDownload: {(data, error) in
+//            if let urlArray = data {
+//                for singleURL in urlArray {
+//                    print(singleURL)
+//                }
+//            } else {
+//                print(error!)
+//            }
+//        })
+        
+        
         return true
     }
 

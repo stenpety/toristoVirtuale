@@ -21,7 +21,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         didSet {
             fetchedResultsController?.delegate = self
             // TODO: Execute search
-            // TODO: reload colectionView data?
+            photoAlbumCollectionView.reloadData()
         }
     }
     
@@ -63,6 +63,13 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Setup FetchedRequestController (which context??)
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        // Download pictures URLs
+        // Check whether 'pin' data were obtained
+        guard let pinInUse = pinForAlbum else {
+            // TODO: Show alert - pin data were not transmitted
+            return
+        }
         
     }
     

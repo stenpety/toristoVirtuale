@@ -11,7 +11,7 @@ import UIKit
 class FlickrDownloader: NSObject {
     
     // MARK: Downloading function
-    func downloadImagesByCoordinates(latitude: Double, longitude: Double) -> [URL] {
+    func downloadImagesByCoordinates(latitude: Double, longitude: Double, completionHandlerForDownload: @escaping (_ result: [URL]?, _ error: NSError?) -> Void) -> URLSessionDataTask {
         
         var imageURLs = [URL]()
         
@@ -20,24 +20,36 @@ class FlickrDownloader: NSObject {
         
         let task = session.dataTask(with: urlRequest, completionHandler: {(data, response, error) in
             
+            // Aux function to send errors
+            func sendError(_ errorString: String) {
+                let userInfo = [NSLocalizedDescriptionKey:errorString]
+                completionHandlerForDownload(nil, NSError(domain: "downloadImagesByCoordinates", code: 1, userInfo: userInfo))
+            }
+            
             // Check for error retuned
             guard error == nil else {
-                // TODO: display alert here
-                print("Error returned")
+                sendError((error?.localizedDescription)!)
                 return
             }
             
             // Check for response status
             guard let responseCode = (response as? HTTPURLResponse)?.statusCode, (responseCode >= 200 && responseCode <= 299) else {
-                // TODO: display alert here
-                print("Bad response code")
+                if let statusCode = (response as? HTTPURLResponse)?.statusCode {
+                    switch statusCode {
+                    case 403: sendError("Forbidden: wrong username/password")
+                    case 404: sendError("Not found")
+                    case 405: sendError("Method not allowed")
+                    default: sendError("Bad status code: \(statusCode)")
+                    }
+                } else {
+                    sendError("Request returned a status code other than 2xx")
+                }
                 return
             }
             
             // Check for data existance
             guard let data = data else {
-                // TODO: display alert here
-                print("Bad data")
+                sendError("Request returned no data")
                 return
             }
             
@@ -46,34 +58,31 @@ class FlickrDownloader: NSObject {
             do {
                 parsedResult = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [String:AnyObject]
             } catch {
-                // TODO: display alert here
-                print("Cannot parse data")
+                sendError("Couldn't parse returned data")
                 return
             }
             
             // Check Flickr response for an error
             guard let stat = parsedResult[FlickrConstants.ResponseKeys.status] as? String, stat == FlickrConstants.ResponseValues.okStatus else {
-                
-                // TODO: display alert here
-                if let stat = parsedResult[FlickrConstants.ResponseKeys.status] as? String, stat == FlickrConstants.ResponseValues.failStatus {
-                    print("Bad Flickr status: \(stat)")
-                    print(parsedResult[FlickrConstants.ResponseKeys.message]!) //Details of failure
 
+                if let stat = parsedResult[FlickrConstants.ResponseKeys.status] as? String, stat == FlickrConstants.ResponseValues.failStatus {
+                    let badStatus = "Bad Flickr status: \(stat). Details: \(parsedResult[FlickrConstants.ResponseKeys.message]!)"
+                    sendError(badStatus)
+                } else {
+                    sendError("Flickr response status is other than OK!")
                 }
                 return
             }
             
             // Check for "photos" key in the response
             guard let photosDictionary = parsedResult[FlickrConstants.ResponseKeys.photos] as? [String:AnyObject] else {
-                // TODO: display alert here
-                print("No 'Photos' key")
+                sendError("No 'Photos' key found in parsed data")
                 return
             }
             
             // Check for "photo" key in photosDictionary
             guard let photosArray = photosDictionary[FlickrConstants.ResponseKeys.photo] as? [[String: AnyObject]] else {
-                // TODO: display alert here
-                print("No 'Photo' key")
+                sendError("No 'Photo' key found in parsed data")
                 return
             }
             
@@ -85,13 +94,11 @@ class FlickrDownloader: NSObject {
                     }
                 }
             }
-            
+            completionHandlerForDownload(imageURLs, nil)
         })
-        
         task.resume()
-        return imageURLs
+        return task
     }
-    
     
     // MARK: Helper Functions
     // Create a URL for photos download request from parameters
@@ -130,5 +137,4 @@ class FlickrDownloader: NSObject {
              FlickrConstants.ParameterKeys.noJSONCallback: FlickrConstants.ParameterValues.disableJSONCallback as AnyObject]
         return methodParameters
     }
-    
 }
