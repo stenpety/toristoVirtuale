@@ -11,9 +11,9 @@ import UIKit
 class FlickrDownloader: NSObject {
     
     // MARK: Downloading function
-    func downloadImagesByCoordinates(latitude: Double, longitude: Double, completionHandlerForDownload: @escaping (_ result: [URL]?, _ error: NSError?) -> Void) -> Void {
+    func downloadImagesByCoordinates(latitude: Double, longitude: Double, completionHandlerForDownload: @escaping (_ result: [String]?, _ error: NSError?) -> Void) -> Void {
         
-        var imageURLs = [URL]()
+        var imageURLs = [String]()
         
         let session = URLSession.shared
         let urlRequest = URLRequest(url: flickrURLFromParameters(makeFlickrParameters(latitude: latitude, longitude: longitude)))
@@ -89,9 +89,7 @@ class FlickrDownloader: NSObject {
             // Iterate through photo array and add URLs to resulting array
             for photo in photosArray {
                 if let photoURLString = photo[FlickrConstants.ResponseKeys.mediumURL] as? String {
-                    if let photoURL = URL(string: photoURLString) {
-                        imageURLs.append(photoURL)
-                    }
+                    imageURLs.append(photoURLString)
                 }
             }
             completionHandlerForDownload(imageURLs, nil)

@@ -40,6 +40,7 @@
 		1A105A641EBF45AE0026343E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A105A671EBF45AE0026343E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1A105A691EBF45AE0026343E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1A1A7C521EDB1FE7007CE88F /* Toristo_Virtuale 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Toristo_Virtuale 3.xcdatamodel"; sourceTree = "<group>"; };
 		1A4E74091EC5A82200CC16F8 /* FlickrDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrDownloader.swift; sourceTree = "<group>"; };
 		1A4E741B1EC5CECF00CC16F8 /* GlobalFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
@@ -399,10 +400,11 @@
 		1A105A611EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				1A1A7C521EDB1FE7007CE88F /* Toristo_Virtuale 3.xcdatamodel */,
 				1A0967B21ED19BA200DDDD0B /* Toristo_Virtuale 2.xcdatamodel */,
 				1A105A621EBF45AE0026343E /* Toristo_Virtuale.xcdatamodel */,
 			);
-			currentVersion = 1A0967B21ED19BA200DDDD0B /* Toristo_Virtuale 2.xcdatamodel */;
+			currentVersion = 1A1A7C521EDB1FE7007CE88F /* Toristo_Virtuale 3.xcdatamodel */;
 			path = Toristo_Virtuale.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

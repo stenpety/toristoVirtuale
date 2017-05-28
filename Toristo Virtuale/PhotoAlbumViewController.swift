@@ -73,37 +73,40 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         let moc = fetchedResultsController?.managedObjectContext
         
-        // Check whether there are photos associated with the pin received
+        // Check whether there are photos associated with the pin received. Download if not
         do {
             let photosArray = try moc?.fetch(photosFetchRequest)
             if photosArray!.isEmpty {
                 print("No photos")
+                
+                // Download pictures URLs in background queue
+                let downloadQueue = DispatchQueue(label: "download")
+                downloadQueue.async { () -> Void in
+                    let flickrDownloader = FlickrDownloader()
+                    flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
+                        
+                        guard error == nil else {
+                            print(error?.localizedDescription as Any)
+                            return
+                        }
+                        for imageUrl in urlArray! {
+                            let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: moc!)
+                            print("URL added: ", imageUrl)
+                        }
+                        })
+                }
             } else {
                 print("Photos!")
             }
         } catch {
             fatalError("Cannot fetch photos!")
         }
-        
-        // Download pictures URLs
-        let flickrDownloader = FlickrDownloader()
-        
-        // TODO: Switch to Background queue
-        flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
-            // TODO: Save array of picture URLs to CoreData store
-            
-            // Associate Photo with Pin
-            
-        })
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // Setup mini-map & label
-        // Check whether 'pin' data were obtained. Otherwise this all is meaningless
         guard let pinInUse = pinForAlbum else {
             fatalError("Pin was not transmitted!")
         }
