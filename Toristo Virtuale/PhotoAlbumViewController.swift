@@ -54,25 +54,38 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         // Set the title of this view
         title = Constants.collectionViewTitle
         
+        // Check whether 'pin' data were obtained
+        guard let pinInUse = pinForAlbum else {
+            fatalError("Pin was not transmitted!")
+        }
+        
         // Get the CoreData stack (from AppDelegate)
         let stack = appDelegate.stack
         
         // Create a FetchRequest
-        let fr = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
-        fr.sortDescriptors = [NSSortDescriptor(key: Constants.keyPhotoURLForPhoto, ascending: true)]
-        
-        // TODO: Configure NSPredicate (for the correct PIN) here
+        let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
+        photosFetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.keyPhotoURLForPhoto, ascending: true)]
+
+        let photosForPinPred = NSPredicate(format: "pin = %@", argumentArray: [pinInUse])
+        photosFetchRequest.predicate = photosForPinPred
         
         // Setup FetchedRequestController (which context??)
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        let moc = fetchedResultsController?.managedObjectContext
         
-        // Download pictures URLs
-        // Check whether 'pin' data were obtained
-        guard let pinInUse = pinForAlbum else {
-            // TODO: Show alert - pin data were not transmitted
-            return
+        // Check whether there are photos associated with the pin received
+        do {
+            let photosArray = try moc?.fetch(photosFetchRequest)
+            if photosArray!.isEmpty {
+                print("No photos")
+            } else {
+                print("Photos!")
+            }
+        } catch {
+            fatalError("Cannot fetch photos!")
         }
         
+        // Download pictures URLs
         let flickrDownloader = FlickrDownloader()
         
         // TODO: Switch to Background queue
@@ -92,8 +105,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         // Setup mini-map & label
         // Check whether 'pin' data were obtained. Otherwise this all is meaningless
         guard let pinInUse = pinForAlbum else {
-            // TODO: Error, perhaps fatal
-            return
+            fatalError("Pin was not transmitted!")
         }
         locationNameLabel.text = pinInUse.locationName
         
@@ -122,6 +134,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
         //TODO: Setup the cell - put image from DB
+        // cell.photoImageView.image = ???
         
         return cell
     }
