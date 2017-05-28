@@ -13,8 +13,7 @@ import CoreData
 public class Photo: NSManagedObject {
     
     // MARK: Initializer
-    // TODO: Initialize Pin? property
-    convenience init(photoURL: String, photo: NSData?, context: NSManagedObjectContext) {
+    convenience init(photoURL: String, photo: NSData?, pin: Pin?, context: NSManagedObjectContext) {
         
         if let ent = NSEntityDescription.entity(forEntityName: Constants.photoEntity, in: context) {
             
@@ -26,9 +25,11 @@ public class Photo: NSManagedObject {
             if let photo = photo {
                 self.photo = photo
             }
-            
+            if let pin = pin {
+                self.pin = pin
+            }
         } else {
-            fatalError("Cannot fing Entity name")
+            fatalError("Cannot find Entity name")
         }
     }
 }
