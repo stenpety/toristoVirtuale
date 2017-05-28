@@ -114,6 +114,9 @@
                                             <constraint firstAttribute="height" constant="24" id="ImP-Vs-ZAr"/>
                                         </constraints>
                                         <state key="normal" title="New Collection"/>
+                                        <connections>
+                                            <action selector="makeNewCollection:" destination="zD1-V5-Cs7" eventType="touchUpInside" id="p6b-Xx-QLR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

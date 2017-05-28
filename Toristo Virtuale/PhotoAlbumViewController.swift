@@ -106,7 +106,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // Setup mini-map & label
+        // Setup mini-map, label, and NewCollection button
         guard let pinInUse = pinForAlbum else {
             fatalError("Pin was not transmitted!")
         }
@@ -122,6 +122,9 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         miniMapPin.coordinate = pinInUseCoordinates
         miniMapPin.title = pinInUse.locationName
         auxMapView.addAnnotation(miniMapPin)
+        
+        // Disable NewCollection button
+        newCollectionButton.isEnabled = false
         
         // Download images using URL
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
@@ -143,10 +146,15 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     // MARK: Actions
+    // Delete an item from Collection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: delete an item
     }
     
+    // Download new collection
+    @IBAction func makeNewCollection(_ sender: UIButton) {
+        
+    }
     
     // MARK: Auxiliary procedures
     func setupFlowLayout() {
