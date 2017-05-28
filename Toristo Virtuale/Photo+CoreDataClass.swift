@@ -13,6 +13,7 @@ import CoreData
 public class Photo: NSManagedObject {
     
     // MARK: Initializer
+    // TODO: Initialize Pin? property
     convenience init(photoURL: String, photo: NSData?, context: NSManagedObjectContext) {
         
         if let ent = NSEntityDescription.entity(forEntityName: Constants.photoEntity, in: context) {

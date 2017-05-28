@@ -169,8 +169,20 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
     
     // MARK: MKMapViewDelegate methods
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        let newPin = Pin(latitude: (view.annotation?.coordinate.latitude)!, longitude: (view.annotation?.coordinate.longitude)!, locationName: (view.annotation?.title)!, context: fetchedResultsController!.managedObjectContext)
-        bringUpPhotoAlbum(forPin: newPin)
+        // TODO: Find already exsisting pin: Fetch request - predicate on lat&long -> get Pin
+        let usedPinFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.pinEntity) // FR for pin
+        usedPinFetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.keyLocationNameForPin, ascending: true)]
+        
+        let usedPinPred = NSPredicate(format: "latitude = %@ AND longitude = %@", argumentArray: [view.annotation!.coordinate.latitude, view.annotation!.coordinate.longitude])
+        usedPinFetchRequest.predicate = usedPinPred
+        let moc = fetchedResultsController!.managedObjectContext
+        do {
+            let usedPinArray = try moc.fetch(usedPinFetchRequest)
+            let usedPin = usedPinArray[0] as! Pin
+            bringUpPhotoAlbum(forPin: usedPin)
+        } catch {
+            fatalError("CANNOT find a proper pin")
+        }
     }
 }
 

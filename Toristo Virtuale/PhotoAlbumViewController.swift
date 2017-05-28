@@ -61,6 +61,8 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         let fr = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
         fr.sortDescriptors = [NSSortDescriptor(key: Constants.keyPhotoURLForPhoto, ascending: true)]
         
+        // TODO: Configure NSPredicate (for the correct PIN) here
+        
         // Setup FetchedRequestController (which context??)
         fetchedResultsController = NSFetchedResultsController(fetchRequest: fr, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -72,9 +74,12 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         
         let flickrDownloader = FlickrDownloader()
+        
+        // TODO: Switch to Background queue
         flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
             // TODO: Save array of picture URLs to CoreData store
             
+            // Associate Photo with Pin
             
         })
         
