@@ -93,10 +93,11 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
                             let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: moc!)
                             print("URL added: ", imageUrl)
                         }
+                        self.appDelegate.stack.save()
                         })
                 }
             } else {
-                print("Photos!")
+                print("Photos!") // Remove it later
             }
         } catch {
             fatalError("Cannot fetch photos!")
@@ -127,14 +128,20 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         newCollectionButton.isEnabled = false
         
         // Download images using URL
+        
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
     
     // MARK: Data Source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
         // TODO: Get the number of sections from the DB
-        return 0
+        if let frc = fetchedResultsController {
+            print(frc.sections![section].numberOfObjects)
+            return frc.sections![section].numberOfObjects
+        } else {
+            print("000")
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
