@@ -75,8 +75,9 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Check whether there are photos associated with the pin received. Download if not
         do {
-            let photosArray = try moc?.fetch(photosFetchRequest)
-            if photosArray!.isEmpty {
+            try fetchedResultsController?.performFetch()
+            
+            if fetchedResultsController?.fetchedObjects?.count == 0 {
                 print("No photos")
                 
                 // Download pictures URLs in background queue
@@ -94,7 +95,12 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
                             print("URL added: ", imageUrl)
                         }
                         self.appDelegate.stack.save()
-                        })
+                    })
+                    do {
+                        try stack.backgroundContext.save()
+                    } catch {
+                        print(error.localizedDescription as Any)
+                    }
                 }
             } else {
                 print("Photos!") // Remove it later
@@ -135,13 +141,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     // MARK: Data Source
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // TODO: Get the number of sections from the DB
-        if let frc = fetchedResultsController {
-            print(frc.sections![section].numberOfObjects)
-            return frc.sections![section].numberOfObjects
-        } else {
-            print("000")
-            return 0
-        }
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
