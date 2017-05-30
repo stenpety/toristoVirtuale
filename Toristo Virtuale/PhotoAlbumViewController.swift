@@ -10,7 +10,7 @@ import UIKit
 import MapKit
 import CoreData
 
-class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, NSFetchedResultsControllerDelegate {
+class PhotoAlbumViewController: UIViewController {
     
     // MARK: Properties
     var numberOfCellsInRow = Constants.initialNumberOfCellsInRow // Set to initial value 3
@@ -19,7 +19,7 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
-            fetchedResultsController?.delegate = self
+            fetchedResultsController?.delegate = self as? NSFetchedResultsControllerDelegate
             // TODO: Execute search
             photoAlbumCollectionView.reloadData()
         }
@@ -137,7 +137,32 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
     
-    // MARK: Data Source
+    // MARK: Actions
+    // Delete an item from Collection
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: delete an item
+    }
+    
+    // Download new collection
+    @IBAction func makeNewCollection(_ sender: UIButton) {
+        
+    }
+    
+    // MARK: Auxiliary procedures
+    func setupFlowLayout() {
+        // Setup Inter-item & line spacing to defaults
+        photoAlbumFlowLayout.minimumInteritemSpacing = Constants.collectionMinInteritemSpace
+        photoAlbumFlowLayout.minimumLineSpacing = Constants.collectionMinLineSpace
+        
+        // Set item width with respect to the number of items in row
+        let dimension = ((photoAlbumCollectionView.frame.size.width) - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
+        photoAlbumFlowLayout.itemSize = CGSize(width: dimension, height: dimension)
+    }
+}
+
+// MARK: CollectionView Data Source & Delegate
+extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return fetchedResultsController?.sections?.count ?? 0
     }
@@ -162,26 +187,30 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         }
         return cell
     }
-    
-    // MARK: Actions
-    // Delete an item from Collection
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: delete an item
-    }
-    
-    // Download new collection
-    @IBAction func makeNewCollection(_ sender: UIButton) {
-        
-    }
-    
-    // MARK: Auxiliary procedures
-    func setupFlowLayout() {
-        // Setup Inter-item & line spacing to defaults
-        photoAlbumFlowLayout.minimumInteritemSpacing = Constants.collectionMinInteritemSpace
-        photoAlbumFlowLayout.minimumLineSpacing = Constants.collectionMinLineSpace
-        
-        // Set item width with respect to the number of items in row
-        let dimension = ((photoAlbumCollectionView.frame.size.width) - CGFloat(numberOfCellsInRow - 1) * Constants.collectionMinInteritemSpace) / CGFloat(numberOfCellsInRow)
-        photoAlbumFlowLayout.itemSize = CGSize(width: dimension, height: dimension)
-    }
 }
+
+// MARK: Fetched Results Controller Delegate
+//extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+//        print("Controller will change content!")
+//        // updates? photoAlbumCollectionView
+//    }
+//    
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        
+//        let photo = anObject as! Photo
+//        
+//        switch type {
+//        case .delete:
+//            print()
+//        case .insert:
+//            print()
+//        case .move:
+//            print()
+//        case .update:
+//            print()
+//        }
+//        
+//    }
+//    
+//}
