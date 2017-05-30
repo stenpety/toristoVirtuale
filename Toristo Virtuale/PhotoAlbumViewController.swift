@@ -138,9 +138,12 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     }
     
     // MARK: Data Source
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return fetchedResultsController?.sections?.count ?? 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // TODO: Get the number of sections from the DB
-        return 0
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
