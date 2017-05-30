@@ -71,7 +71,6 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
         
         // Setup FetchedRequestController (which context??)
         fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
-        let moc = fetchedResultsController?.managedObjectContext
         
         // Check whether there are photos associated with the pin received. Download if not
         do {
@@ -91,13 +90,13 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
                             return
                         }
                         for imageUrl in urlArray! {
-                            let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: moc!)
+                            let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: stack.mainContext)
                             print("URL added: ", imageUrl)
                         }
                         self.appDelegate.stack.save()
                     })
                     do {
-                        try stack.backgroundContext.save()
+                        try stack.mainContext.save()
                     } catch {
                         print(error.localizedDescription as Any)
                     }
