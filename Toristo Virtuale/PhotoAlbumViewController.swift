@@ -148,9 +148,18 @@ class PhotoAlbumViewController: UIViewController, UICollectionViewDelegate, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.photoAlbumCollectionItem, for: indexPath) as! PhotoAlbumCollectionViewCell
-        //TODO: Setup the cell - put image from DB
-        // cell.photoImageView.image = ???
+        let photo = fetchedResultsController?.fetchedObjects?[indexPath.item] as! Photo
         
+        // Check whether photo (image) already exists
+        if photo.photo != nil {
+            cell.photoImageView.image = UIImage(data: photo.photo! as Data)
+        } else {
+            // Display a placeholder
+            cell.photoImageView.image = #imageLiteral(resourceName: "ImagePlaceholder")
+            
+            // Download photo in background queue
+            
+        }
         return cell
     }
     
