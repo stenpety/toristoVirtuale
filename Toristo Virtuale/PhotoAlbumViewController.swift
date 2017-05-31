@@ -20,7 +20,6 @@ class PhotoAlbumViewController: UIViewController {
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
             fetchedResultsController?.delegate = self
-            // TODO: Execute search
             photoAlbumCollectionView.reloadData()
         }
     }
@@ -194,13 +193,6 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
 // MARK: Fetched Results Controller Delegate
 extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
     
-    
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        print("Controller will change content!")
-        
-        // updates? photoAlbumCollectionView
-    }
-    
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         
         let photo = anObject as! Photo
@@ -215,7 +207,7 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             blockOperations.append(BlockOperation(block: { [weak self] in
                 if let this = self {
-                    this.photoAlbumCollectionView!.insertItems(at: [indexPath!])
+                    this.photoAlbumCollectionView!.insertItems(at: [newIndexPath!])
                 }
             }))
         case .move:
@@ -227,9 +219,20 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
         case .update:
             blockOperations.append(BlockOperation(block: { [weak self] in
                 if let this = self {
-                    this.photoAlbumCollectionView!.reloadItems(at: [indexPath])
+                    this.photoAlbumCollectionView!.reloadItems(at: [indexPath!])
                 }
             }))
         }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        photoAlbumCollectionView!.performBatchUpdates({ () -> Void in
+            // Start all collected block operations
+            for operation: BlockOperation in self.blockOperations {
+                operation.start()
+            }
+        }, completion: { (finished) -> Void in
+            self.blockOperations.removeAll(keepingCapacity: false)
+        })
     }
 }
