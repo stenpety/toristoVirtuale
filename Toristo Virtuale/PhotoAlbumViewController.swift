@@ -19,11 +19,13 @@ class PhotoAlbumViewController: UIViewController {
     
     var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
         didSet {
-            fetchedResultsController?.delegate = self as? NSFetchedResultsControllerDelegate
+            fetchedResultsController?.delegate = self
             // TODO: Execute search
             photoAlbumCollectionView.reloadData()
         }
     }
+    
+    var blockOperations = [BlockOperation]()
     
     // MARK: Outlets
     @IBOutlet weak var auxMapView: MKMapView!
@@ -190,27 +192,44 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
 }
 
 // MARK: Fetched Results Controller Delegate
-//extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
-//    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-//        print("Controller will change content!")
-//        // updates? photoAlbumCollectionView
-//    }
-//    
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        
-//        let photo = anObject as! Photo
-//        
-//        switch type {
-//        case .delete:
-//            print()
-//        case .insert:
-//            print()
-//        case .move:
-//            print()
-//        case .update:
-//            print()
-//        }
-//        
-//    }
-//    
-//}
+extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
+    
+    
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("Controller will change content!")
+        
+        // updates? photoAlbumCollectionView
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        let photo = anObject as! Photo
+        
+        switch type {
+        case .delete:
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.photoAlbumCollectionView!.deleteItems(at: [indexPath!])
+                }
+                }))
+        case .insert:
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.photoAlbumCollectionView!.insertItems(at: [indexPath!])
+                }
+            }))
+        case .move:
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.photoAlbumCollectionView!.moveItem(at: indexPath!, to: newIndexPath!)
+                }
+            }))
+        case .update:
+            blockOperations.append(BlockOperation(block: { [weak self] in
+                if let this = self {
+                    this.photoAlbumCollectionView!.reloadItems(at: [indexPath])
+                }
+            }))
+        }
+    }
+}
