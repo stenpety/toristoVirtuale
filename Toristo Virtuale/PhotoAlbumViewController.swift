@@ -78,7 +78,6 @@ class PhotoAlbumViewController: UIViewController {
             try fetchedResultsController?.performFetch()
             
             if fetchedResultsController?.fetchedObjects?.count == 0 {
-                print("No photos")
                 
                 // Download pictures URLs in background queue
                 let downloadQueue = DispatchQueue(label: "download")
@@ -102,8 +101,6 @@ class PhotoAlbumViewController: UIViewController {
                         print(error.localizedDescription as Any)
                     }
                 }
-            } else {
-                print("Photos!") // Remove it later
             }
         } catch {
             fatalError("Cannot fetch photos!")
@@ -133,8 +130,6 @@ class PhotoAlbumViewController: UIViewController {
         // Disable NewCollection button
         newCollectionButton.isEnabled = false
         
-        // Download images using URL
-        
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
     
@@ -146,7 +141,7 @@ class PhotoAlbumViewController: UIViewController {
     
     // Download new collection
     @IBAction func makeNewCollection(_ sender: UIButton) {
-        
+        // TODO: start request to download new photos
     }
     
     // MARK: Auxiliary procedures
@@ -183,19 +178,54 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
             // Display a placeholder
             cell.photoImageView.image = #imageLiteral(resourceName: "ImagePlaceholder")
             
-            // Download photo in background queue
+            // TODO: Download photo in background queue
+            guard let url = URL(string: photo.photoURL!) else {
+                print("URL \(String(describing: photo.photoURL)) is not valid")
+                return cell // ?
+            }
+            
+            asyncImageDownload(fromURL: url, completionHandler: {(image) -> Void in
+                guard let imageData = UIImageJPEGRepresentation(image, 1) else {
+                    print("Cannot convert image to data")
+                    return
+                }
+                photo.photo = imageData as NSData
+                })
             
         }
         return cell
     }
 }
 
+extension PhotoAlbumViewController {
+    
+    // MARK: Image downloading functions
+    func asyncImageDownload(fromURL url: URL, completionHandler handler: @escaping (_ image: UIImage) -> Void) {
+        
+        DispatchQueue.global(qos: .userInitiated).async { () -> Void in
+            
+            guard let imageData = try? Data(contentsOf: url) else {
+                print("Cannot download image from: \(url)")
+                return
+            }
+            
+            guard let image = UIImage(data: imageData) else {
+                print("The data are NOT an image")
+                return
+            }
+            
+            performUIUpdatesOnMain {
+                handler(image)
+            }
+        }
+    }
+}
+
 // MARK: Fetched Results Controller Delegate
 extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
     
+    // Put change operation into BlockOperations
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        
-        let photo = anObject as! Photo
         
         switch type {
         case .delete:
@@ -225,6 +255,7 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
         }
     }
     
+    // Start BlockOperations
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         photoAlbumCollectionView!.performBatchUpdates({ () -> Void in
             // Start all collected block operations
