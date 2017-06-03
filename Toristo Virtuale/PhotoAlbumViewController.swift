@@ -91,7 +91,6 @@ class PhotoAlbumViewController: UIViewController {
                         }
                         for imageUrl in urlArray! {
                             let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: stack.mainContext)
-                            print("URL added: ", imageUrl)
                         }
                         self.appDelegate.stack.save()
                     })
@@ -126,9 +125,6 @@ class PhotoAlbumViewController: UIViewController {
         miniMapPin.coordinate = pinInUseCoordinates
         miniMapPin.title = pinInUse.locationName
         auxMapView.addAnnotation(miniMapPin)
-        
-        // Disable NewCollection button
-        newCollectionButton.isEnabled = false
         
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
@@ -258,12 +254,17 @@ extension PhotoAlbumViewController: NSFetchedResultsControllerDelegate {
     // Start BlockOperations
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         photoAlbumCollectionView!.performBatchUpdates({ () -> Void in
+            
+            // Disable NewCollection button
+            self.newCollectionButton.isEnabled = false
+            
             // Start all collected block operations
             for operation: BlockOperation in self.blockOperations {
                 operation.start()
             }
         }, completion: { (finished) -> Void in
             self.blockOperations.removeAll(keepingCapacity: false)
+            self.newCollectionButton.isEnabled = true
         })
     }
 }
