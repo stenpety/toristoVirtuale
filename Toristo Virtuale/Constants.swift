@@ -76,8 +76,8 @@ struct FlickrConstants {
     static let APIPath = "/services/rest"
     
     // Parameters for making bounding box (geo location search)
-    static let searchBBoxHalfHeight = 1.0
-    static let searchBBoxHalfWidth = 1.0
+    static let searchBBoxHalfHeight = 0.1
+    static let searchBBoxHalfWidth = 0.1
     static let searchLatRange = (-90.0, 90.0)
     static let searchLongRange = (-180.0, 180.0)
     

@@ -93,6 +93,11 @@ class PhotoAlbumViewController: UIViewController {
                             let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: stack.mainContext)
                         }
                         self.appDelegate.stack.save()
+                        
+                        // Set a label for 'No photos'
+                        if urlArray?.count == 0 {
+                            self.locationNameLabel.text = Constants.noPhotos
+                        }
                     })
                     do {
                         try stack.mainContext.save()
@@ -125,11 +130,6 @@ class PhotoAlbumViewController: UIViewController {
         miniMapPin.coordinate = pinInUseCoordinates
         miniMapPin.title = pinInUse.locationName
         auxMapView.addAnnotation(miniMapPin)
-        
-        // Set a label for 'No photos'
-        if fetchedResultsController?.fetchedObjects?.count == 0 {
-            locationNameLabel.text = Constants.noPhotos
-        }
         
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
