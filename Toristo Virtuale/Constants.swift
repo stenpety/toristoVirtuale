@@ -25,6 +25,7 @@ struct Constants {
     static let collectionMinInteritemSpace: CGFloat = 3
     static let collectionMinLineSpace: CGFloat = 3
     static let collectionViewTitle = "My memories"
+    static let noPhotos = "No Country for Old Men"
     
     // UserDefaults keys
     static let hasLaunchedBefore = "hasLaunchedBefore"

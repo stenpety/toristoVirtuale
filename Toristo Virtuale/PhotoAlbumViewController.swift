@@ -126,6 +126,11 @@ class PhotoAlbumViewController: UIViewController {
         miniMapPin.title = pinInUse.locationName
         auxMapView.addAnnotation(miniMapPin)
         
+        // Set a label for 'No photos'
+        if fetchedResultsController?.fetchedObjects?.count == 0 {
+            locationNameLabel.text = Constants.noPhotos
+        }
+        
         photoAlbumCollectionView.reloadData() // Reload collection to reflect changes
     }
     
@@ -133,6 +138,7 @@ class PhotoAlbumViewController: UIViewController {
     // Delete an item from Collection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: delete an item
+        
     }
     
     // Download new collection
