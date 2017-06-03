@@ -138,12 +138,22 @@ class PhotoAlbumViewController: UIViewController {
     // Delete an item from Collection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // TODO: delete an item
-        
+        do {
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print("Cannot perform fetch")
+        }
+        let moc = fetchedResultsController?.managedObjectContext
+        moc?.delete(fetchedResultsController?.object(at: indexPath) as! NSManagedObject)
     }
     
     // Download new collection
     @IBAction func makeNewCollection(_ sender: UIButton) {
         // TODO: start request to download new photos
+        // Nullify existing photos
+        
+        // Download new photos
+        
     }
     
     // MARK: Auxiliary procedures
