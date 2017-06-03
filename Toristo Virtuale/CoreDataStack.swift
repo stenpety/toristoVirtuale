@@ -34,7 +34,6 @@ struct CoreDataStack {
         
         // The model is in the MAIN bundle - set the modelURL property
         guard let mainBundleModelURL = Bundle.main.url(forResource: modelName, withExtension: Constants.modelExtension) else {
-            // TODO: Give alert - Unable to find MODEL in the main bundle
             print("Unable to find MODEL in the main bundle")
             return nil
         }
@@ -42,7 +41,6 @@ struct CoreDataStack {
         
         // Create a model from the URL
         guard let modelFromURL = NSManagedObjectModel(contentsOf: modelURL) else {
-            // TODO: Give alert - Unable to create MODEL from the URL
             print("Unable to create MODEL from the URL")
             return nil
         }
@@ -66,7 +64,7 @@ struct CoreDataStack {
         let fileManager = FileManager.default
         
         guard let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first else {
-            // TODO: Give alert - unable to reach the Documents folder
+            print("Unable to find User Documents URL")
             return nil
         }
         dbURL = documentsURL.appendingPathComponent(Constants.sqliteStoreName)
@@ -75,7 +73,7 @@ struct CoreDataStack {
         do {
             try storeCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: dbURL, options: Constants.optionsForMigration as [NSObject: AnyObject])
         } catch {
-            // TODO: Give alert - Unable to add store at 'dbURL'
+            print("Unable to add store at 'dbURL'")
         }
     }
 }
@@ -106,7 +104,6 @@ extension CoreDataStack {
             }
         }
     }
-    
 }
 
 // MARK: Save data

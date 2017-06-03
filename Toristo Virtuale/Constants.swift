@@ -27,6 +27,9 @@ struct Constants {
     static let collectionViewTitle = "My memories"
     static let noPhotos = "No Country for Old Men"
     
+    // Alert constants
+    static let alertDismiss = "Dismiss"
+    
     // UserDefaults keys
     static let hasLaunchedBefore = "hasLaunchedBefore"
     static let userLatitude = "userLAtitude"
@@ -57,6 +60,7 @@ struct Constants {
     // Entities
     static let photoEntity = "Photo"
     static let pinEntity = "Pin"
+    
     // Keys
     static let keyLatitudeForPin = "latitude"
     static let keyLongitudeForPin = "longitude"
