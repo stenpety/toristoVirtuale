@@ -110,7 +110,7 @@ class PhotoAlbumViewController: UIViewController {
     // MARK: Actions
     // Delete an item from Collection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: delete an item
+        
         do {
             try fetchedResultsController?.performFetch()
         } catch {
@@ -122,11 +122,25 @@ class PhotoAlbumViewController: UIViewController {
     
     // Download new collection
     @IBAction func makeNewCollection(_ sender: UIButton) {
-        // TODO: start request to download new photos
+        
+        do {
+            try fetchedResultsController?.performFetch()
+        } catch {
+            print("Cannot perform fetch")
+        }
+        let moc = fetchedResultsController?.managedObjectContext
+        
         // Nullify existing photos
+        for object in (fetchedResultsController?.fetchedObjects)! {
+            moc?.delete(object as! NSManagedObject)
+            }
+        appDelegate.stack.save()
         
         // Download new photos
-        
+        guard let pinInUse = pinForAlbum else {
+            fatalError("Pin was not transmitted!")
+        }
+        downloadImagesURLsForPin(pinInUse)
     }
     
     // MARK: Auxiliary procedures
@@ -176,7 +190,6 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
                 }
                 photo.photo = imageData as NSData
                 })
-            
         }
         return cell
     }
