@@ -60,9 +60,6 @@ class PhotoAlbumViewController: UIViewController {
             fatalError("Pin was not transmitted!")
         }
         
-        // Get the CoreData stack (from AppDelegate)
-        let stack = appDelegate.stack
-        
         // Create a FetchRequest
         let photosFetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: Constants.photoEntity)
         photosFetchRequest.sortDescriptors = [NSSortDescriptor(key: Constants.keyPhotoURLForPhoto, ascending: true)]
@@ -71,7 +68,7 @@ class PhotoAlbumViewController: UIViewController {
         photosFetchRequest.predicate = photosForPinPred
         
         // Setup FetchedRequestController (which context??)
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: appDelegate.stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Check whether there are photos associated with the pin received. Download if not
         do {
@@ -80,31 +77,7 @@ class PhotoAlbumViewController: UIViewController {
             if fetchedResultsController?.fetchedObjects?.count == 0 {
                 
                 // Download pictures URLs in background queue
-                let downloadQueue = DispatchQueue(label: "download")
-                downloadQueue.async { () -> Void in
-                    let flickrDownloader = FlickrDownloader()
-                    flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
-                        
-                        guard error == nil else {
-                            print(error?.localizedDescription as Any)
-                            return
-                        }
-                        for imageUrl in urlArray! {
-                            let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: stack.mainContext)
-                        }
-                        self.appDelegate.stack.save()
-                        
-                        // Set a label for 'No photos'
-                        if urlArray?.count == 0 {
-                            self.locationNameLabel.text = Constants.noPhotos
-                        }
-                    })
-                    do {
-                        try stack.mainContext.save()
-                    } catch {
-                        print(error.localizedDescription as Any)
-                    }
-                }
+                downloadImagesURLsForPin(pinInUse)
             }
         } catch {
             fatalError("Cannot fetch photos!")
@@ -212,6 +185,34 @@ extension PhotoAlbumViewController: UICollectionViewDelegate, UICollectionViewDa
 extension PhotoAlbumViewController {
     
     // MARK: Image downloading functions
+    func downloadImagesURLsForPin(_ pinInUse: Pin) {
+        let downloadQueue = DispatchQueue(label: "download")
+        downloadQueue.async { () -> Void in
+            let flickrDownloader = FlickrDownloader()
+            flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
+                
+                guard error == nil else {
+                    print(error?.localizedDescription as Any)
+                    return
+                }
+                for imageUrl in urlArray! {
+                    let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: self.appDelegate.stack.mainContext)
+                }
+                self.appDelegate.stack.save()
+                
+                // Set a label for 'No photos'
+                if urlArray?.count == 0 {
+                    self.locationNameLabel.text = Constants.noPhotos
+                }
+            })
+            do {
+                try self.appDelegate.stack.mainContext.save()
+            } catch {
+                print(error.localizedDescription as Any)
+            }
+        }
+    }
+    
     func asyncImageDownload(fromURL url: URL, completionHandler handler: @escaping (_ image: UIImage) -> Void) {
         
         DispatchQueue.global(qos: .userInitiated).async { () -> Void in
