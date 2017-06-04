@@ -86,8 +86,9 @@ class FlickrDownloader: NSObject {
                 return
             }
             
-            // Generate random page number
-            let randomPage = Int(arc4random_uniform(UInt32(totalPages))) + 1
+            // Set limit & Generate random page number
+            let pageLimit = min(40, totalPages)
+            let randomPage = Int(arc4random_uniform(UInt32(pageLimit))) + 1
             
             // Launch dlImages with random number
             self.downloadImagesByCoordinates(latitude: latitude, longitude: longitude, withPageNumber: randomPage, completionHandlerForDownload: completionHandlerForDownload)
@@ -177,7 +178,6 @@ class FlickrDownloader: NSObject {
                     imageURLs.append(photoURLString)
                 }
             }
-            print("PAGE: ", pageNumber)
             completionHandlerForDownload(imageURLs, nil)
         })
         task.resume()
