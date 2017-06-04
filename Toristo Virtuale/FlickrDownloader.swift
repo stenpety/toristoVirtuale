@@ -131,7 +131,8 @@ class FlickrDownloader: NSObject {
              FlickrConstants.ParameterKeys.extras: FlickrConstants.ParameterValues.mediumURL as AnyObject,
              FlickrConstants.ParameterKeys.method: FlickrConstants.ParameterValues.searchMethod as AnyObject,
              FlickrConstants.ParameterKeys.format: FlickrConstants.ParameterValues.responseFormat as AnyObject,
-             FlickrConstants.ParameterKeys.noJSONCallback: FlickrConstants.ParameterValues.disableJSONCallback as AnyObject]
+             FlickrConstants.ParameterKeys.noJSONCallback: FlickrConstants.ParameterValues.disableJSONCallback as AnyObject,
+             FlickrConstants.ParameterKeys.perPage: FlickrConstants.ParameterValues.numberOfPhotosPerPage as AnyObject]
         return methodParameters
     }
 }

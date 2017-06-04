@@ -93,6 +93,8 @@ struct FlickrConstants {
         static let method = "method"
         static let format = "format"
         static let noJSONCallback = "nojsoncallback"
+        static let perPage = "per_page"
+        static let page = "page"
     }
     
     struct ParameterValues {
@@ -102,6 +104,7 @@ struct FlickrConstants {
         static let searchMethod = "flickr.photos.search"
         static let responseFormat = "json"
         static let disableJSONCallback = "1"
+        static let numberOfPhotosPerPage = "30"
     }
     
     struct ResponseKeys {
