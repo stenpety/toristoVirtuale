@@ -104,7 +104,7 @@ struct FlickrConstants {
         static let searchMethod = "flickr.photos.search"
         static let responseFormat = "json"
         static let disableJSONCallback = "1"
-        static let numberOfPhotosPerPage = "30"
+        static let numberOfPhotosPerPage = 25
     }
     
     struct ResponseKeys {
@@ -114,7 +114,7 @@ struct FlickrConstants {
         static let title = "title"
         static let mediumURL = "url_m"
         static let message = "message" // For debug - read stat fail details
-        //static let pages = "pages"
+        static let pages = "pages"
         //static let total = "total"
     }
     

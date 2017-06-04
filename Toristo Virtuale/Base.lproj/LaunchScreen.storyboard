@@ -21,8 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tourist" translatesAutoresizingMaskIntoConstraints="NO" id="6Ny-gg-S9c">
-                                <rect key="frame" x="116.5" y="191.5" width="141" height="283"/>
+                            <imageView userInteractionEnabled="NO" alpha="0.75" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tourist_v2" translatesAutoresizingMaskIntoConstraints="NO" id="6Ny-gg-S9c">
+                                <rect key="frame" x="106" y="252" width="162" height="162"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -38,6 +38,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Tourist" width="141" height="283"/>
+        <image name="Tourist_v2" width="162" height="162"/>
     </resources>
 </document>
