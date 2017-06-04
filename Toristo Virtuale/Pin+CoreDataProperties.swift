@@ -2,7 +2,7 @@
 //  Pin+CoreDataProperties.swift
 //  Toristo Virtuale
 //
-//  Created by Petr Stenin on 28/05/2017.
+//  Created by Petr Stenin on 04/06/2017.
 //  Copyright © 2017 Petr Stenin. All rights reserved.
 //
 
