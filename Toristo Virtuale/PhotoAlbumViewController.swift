@@ -67,7 +67,7 @@ class PhotoAlbumViewController: UIViewController {
         let photosForPinPred = NSPredicate(format: "pin = %@", argumentArray: [pinInUse])
         photosFetchRequest.predicate = photosForPinPred
         
-        // Setup FetchedRequestController (which context??)
+        // Setup FetchedRequestController
         fetchedResultsController = NSFetchedResultsController(fetchRequest: photosFetchRequest, managedObjectContext: appDelegate.stack.mainContext, sectionNameKeyPath: nil, cacheName: nil)
         
         // Check whether there are photos associated with the pin received. Download if not
@@ -118,6 +118,7 @@ class PhotoAlbumViewController: UIViewController {
         }
         let moc = fetchedResultsController?.managedObjectContext
         moc?.delete(fetchedResultsController?.object(at: indexPath) as! NSManagedObject)
+        appDelegate.stack.save()
     }
     
     // Download new collection
