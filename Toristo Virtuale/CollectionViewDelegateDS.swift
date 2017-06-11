@@ -43,6 +43,15 @@ extension PhotoAlbumViewController {
                     return
                 }
                 photo.photo = imageData as NSData
+                
+                // Save image to CoreData store
+                General.sharedInstance.performUpdatesOnMain {
+                    do {
+                        try self.appDelegate.stack.mainContext.save()
+                    } catch {
+                        print(error.localizedDescription as Any)
+                    }
+                }
             })
         }
         return cell
