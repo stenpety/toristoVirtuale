@@ -20,6 +20,9 @@
 		1A105A681EBF45AE0026343E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A105A661EBF45AE0026343E /* LaunchScreen.storyboard */; };
 		1A4E740A1EC5A82200CC16F8 /* FlickrDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E74091EC5A82200CC16F8 /* FlickrDownloader.swift */; };
 		1A4E741C1EC5CECF00CC16F8 /* GeneralFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A4E741B1EC5CECF00CC16F8 /* GeneralFunctions.swift */; };
+		1A50C3B91EED15BA0055E3EB /* FetchedResultsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A50C3B81EED15BA0055E3EB /* FetchedResultsDelegate.swift */; };
+		1A50C3BB1EED16AC0055E3EB /* DownloadingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A50C3BA1EED16AC0055E3EB /* DownloadingFunctions.swift */; };
+		1A50C3BD1EED17EC0055E3EB /* CollectionViewDelegateDS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A50C3BC1EED17EC0055E3EB /* CollectionViewDelegateDS.swift */; };
 		1A9C63F01EC3648600283D07 /* PhotoAlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */; };
 		1A9C63F21EC364EF00283D07 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */; };
 		1A9C63F41EC3656F00283D07 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9C63F31EC3656F00283D07 /* Constants.swift */; };
@@ -44,6 +47,9 @@
 		1A1A7C531EE3D1A5007CE88F /* Toristo_Virtuale 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Toristo_Virtuale 4.xcdatamodel"; sourceTree = "<group>"; };
 		1A4E74091EC5A82200CC16F8 /* FlickrDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrDownloader.swift; sourceTree = "<group>"; };
 		1A4E741B1EC5CECF00CC16F8 /* GeneralFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeneralFunctions.swift; sourceTree = "<group>"; };
+		1A50C3B81EED15BA0055E3EB /* FetchedResultsDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsDelegate.swift; sourceTree = "<group>"; };
+		1A50C3BA1EED16AC0055E3EB /* DownloadingFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingFunctions.swift; sourceTree = "<group>"; };
+		1A50C3BC1EED17EC0055E3EB /* CollectionViewDelegateDS.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewDelegateDS.swift; sourceTree = "<group>"; };
 		1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoAlbumViewController.swift; sourceTree = "<group>"; };
 		1A9C63F11EC364EF00283D07 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		1A9C63F31EC3656F00283D07 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -119,6 +125,9 @@
 			children = (
 				1A105A5C1EBF45AE0026343E /* TravelMapViewController.swift */,
 				1A9C63EF1EC3648600283D07 /* PhotoAlbumViewController.swift */,
+				1A50C3BC1EED17EC0055E3EB /* CollectionViewDelegateDS.swift */,
+				1A50C3BA1EED16AC0055E3EB /* DownloadingFunctions.swift */,
+				1A50C3B81EED15BA0055E3EB /* FetchedResultsDelegate.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -214,6 +223,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A0967AC1ECE1AE200DDDD0B /* Pin+CoreDataClass.swift in Sources */,
+				1A50C3B91EED15BA0055E3EB /* FetchedResultsDelegate.swift in Sources */,
+				1A50C3BD1EED17EC0055E3EB /* CollectionViewDelegateDS.swift in Sources */,
+				1A50C3BB1EED16AC0055E3EB /* DownloadingFunctions.swift in Sources */,
 				1A0967AE1ECE1AE200DDDD0B /* Photo+CoreDataClass.swift in Sources */,
 				1A9C63F21EC364EF00283D07 /* CoreDataStack.swift in Sources */,
 				1A105A631EBF45AE0026343E /* Toristo_Virtuale.xcdatamodeld in Sources */,

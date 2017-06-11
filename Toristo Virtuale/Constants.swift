@@ -21,7 +21,7 @@ struct Constants {
     static let pinAnnotationView = "pinAnnotationView"
     
     // Collection view constants
-    static let initialNumberOfCellsInRow = 3
+    static let initialNumberOfCellsInRow = 4
     static let collectionMinInteritemSpace: CGFloat = 3
     static let collectionMinLineSpace: CGFloat = 3
     static let collectionViewTitle = "My memories"
