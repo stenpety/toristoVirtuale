@@ -206,8 +206,8 @@ extension PhotoAlbumViewController {
             flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
                 
                 guard error == nil else {
-                    performUIUpdatesOnMain {
-                        showAlert(self, title: "Download error", message: "error?.localizedDescription as Any", actionTitle: Constants.alertDismiss)
+                    General.sharedInstance.performUIUpdatesOnMain {
+                        General.sharedInstance.showAlert(self, title: "Download error", message: "error?.localizedDescription as Any", actionTitle: Constants.alertDismiss)
                     }
                     return
                 }
@@ -234,8 +234,8 @@ extension PhotoAlbumViewController {
         DispatchQueue.global(qos: .userInitiated).async { () -> Void in
             
             guard let imageData = try? Data(contentsOf: url) else {
-                performUIUpdatesOnMain {
-                    showAlert(self, title: "Download error", message: "Cannot download image from: \(url)", actionTitle: Constants.alertDismiss)
+                General.sharedInstance.performUIUpdatesOnMain {
+                    General.sharedInstance.showAlert(self, title: "Download error", message: "Cannot download image from: \(url)", actionTitle: Constants.alertDismiss)
                 }
                 return
             }
@@ -245,7 +245,7 @@ extension PhotoAlbumViewController {
                 return
             }
             
-            performUIUpdatesOnMain {
+            General.sharedInstance.performUIUpdatesOnMain {
                 handler(image)
             }
         }

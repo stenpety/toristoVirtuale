@@ -129,7 +129,7 @@ class TravelMapViewController: UIViewController, NSFetchedResultsControllerDeleg
             CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: pointCoordinates.latitude, longitude: pointCoordinates.longitude ), completionHandler: {(placemarks, error) -> Void in
                 
                 guard error == nil, let placemarkArray = placemarks else {
-                    showAlert(self, title: "Geocoding failed", message: "Unable to return a geocode for the selected location", actionTitle: Constants.alertDismiss)
+                    General.sharedInstance.showAlert(self, title: "Geocoding failed", message: "Unable to return a geocode for the selected location", actionTitle: Constants.alertDismiss)
                     return
                 }
                 
