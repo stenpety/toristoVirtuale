@@ -19,7 +19,7 @@ extension PhotoAlbumViewController {
             flickrDownloader.downloadImagesByCoordinates(latitude: pinInUse.latitude, longitude: pinInUse.longitude, completionHandlerForDownload: {(urlArray, error) in
                 
                 guard error == nil else {
-                    General.sharedInstance.performUIUpdatesOnMain {
+                    General.sharedInstance.performUpdatesOnMain {
                         General.sharedInstance.showAlert(self, title: "Download error", message: "error?.localizedDescription as Any", actionTitle: Constants.alertDismiss)
                     }
                     return
@@ -27,6 +27,7 @@ extension PhotoAlbumViewController {
                 for imageUrl in urlArray! {
                     let _ = Photo(photoURL: imageUrl, photo: nil, pin: pinInUse, context: self.appDelegate.stack.mainContext)
                 }
+                
                 self.appDelegate.stack.save()
                 
                 // Set a label for 'No photos'
@@ -34,10 +35,13 @@ extension PhotoAlbumViewController {
                     self.locationNameLabel.text = Constants.noPhotos
                 }
             })
-            do {
-                try self.appDelegate.stack.mainContext.save()
-            } catch {
-                print(error.localizedDescription as Any)
+            
+            General.sharedInstance.performUpdatesOnMain {
+                do {
+                    try self.appDelegate.stack.mainContext.save()
+                } catch {
+                    print(error.localizedDescription as Any)
+                }
             }
         }
     }
@@ -47,7 +51,7 @@ extension PhotoAlbumViewController {
         DispatchQueue.global(qos: .userInitiated).async { () -> Void in
             
             guard let imageData = try? Data(contentsOf: url) else {
-                General.sharedInstance.performUIUpdatesOnMain {
+                General.sharedInstance.performUpdatesOnMain {
                     General.sharedInstance.showAlert(self, title: "Download error", message: "Cannot download image from: \(url)", actionTitle: Constants.alertDismiss)
                 }
                 return
@@ -58,7 +62,7 @@ extension PhotoAlbumViewController {
                 return
             }
             
-            General.sharedInstance.performUIUpdatesOnMain {
+            General.sharedInstance.performUpdatesOnMain {
                 handler(image)
             }
         }

@@ -26,7 +26,7 @@ class General: NSObject {
     }
     
     // MARK: Updates on Main queue
-    func performUIUpdatesOnMain(_ updates: @escaping () -> Void) {
+    func performUpdatesOnMain(_ updates: @escaping () -> Void) {
         DispatchQueue.main.async {
             updates()
         }
